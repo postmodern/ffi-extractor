@@ -36,7 +36,7 @@ module FFI
         ptr = Extractor.EXTRACTOR_plugin_add_defaults(option)
 
         if ptr.null?
-          raise("no plugins were loaded")
+          raise(LoadError,"no plugins were loaded")
         end
 
         return new(ptr)
