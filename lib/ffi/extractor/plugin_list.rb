@@ -33,7 +33,11 @@ module FFI
       end
 
       def self.defaults(option)
-        new(Extractor.EXTRACTOR_plugin_add_defaults(option))
+        unless (ptr = Extractor.EXTRACTOR_plugin_add_defaults(option))
+          raise("no plugins were loaded")
+        end
+
+        return new(ptr)
       end
 
       def add(library,library_options,option)
@@ -60,13 +64,13 @@ module FFI
         return self
       end
 
-      alias remove delete
+      alias delete remove
 
       def remove_all
         Extractor.EXTRACTOR_plugin_remove_all(self)
       end
 
-      alias remove_all clear
+      alias clear remove_all
 
       def to_ptr
         @ptr
