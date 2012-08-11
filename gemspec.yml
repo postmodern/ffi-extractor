@@ -1,0 +1,12 @@
+name: ffi-extractor
+summary: "TODO: Summary"
+description: "TODO: Description"
+license: MIT
+authors: Postmodern
+email: postmodern.mod3@gmail.com
+homepage: https://github.com/postmodern/ffi-extractor#readme
+
+development_dependencies:
+  rspec: ~> 2.4
+  rubygems-tasks: ~> 0.2
+  yard: ~> 0.8
