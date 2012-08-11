@@ -1,10 +1,18 @@
 name: ffi-extractor
-summary: "TODO: Summary"
-description: "TODO: Description"
-license: MIT
+summary: Ruby FFI bindings to libextractor
+description:
+  Ruby FFI bindings to libextractor, a library for extracting metadata from
+  a variety of file formats.
+
+license: GPLv2
 authors: Postmodern
 email: postmodern.mod3@gmail.com
 homepage: https://github.com/postmodern/ffi-extractor#readme
+
+requirements: libextractor
+
+dependencies:
+  ffi: ~> 1.0
 
 development_dependencies:
   rspec: ~> 2.4
