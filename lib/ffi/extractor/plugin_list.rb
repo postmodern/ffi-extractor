@@ -32,7 +32,7 @@ module FFI
         Extractor.EXTRACTOR_plugin_remove_all(self)
       end
 
-      def self.defaults(option)
+      def self.defaults(option=:default_policy)
         unless (ptr = Extractor.EXTRACTOR_plugin_add_defaults(option))
           raise("no plugins were loaded")
         end
