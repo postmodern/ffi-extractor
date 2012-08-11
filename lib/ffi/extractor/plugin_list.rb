@@ -33,7 +33,9 @@ module FFI
       end
 
       def self.defaults(option=:default_policy)
-        unless (ptr = Extractor.EXTRACTOR_plugin_add_defaults(option))
+        ptr = Extractor.EXTRACTOR_plugin_add_defaults(option)
+
+        if ptr.null?
           raise("no plugins were loaded")
         end
 
