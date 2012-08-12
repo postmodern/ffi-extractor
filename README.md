@@ -42,6 +42,18 @@ libextractor is a part of the [GNU project](http://www.gnu.org/).
 
     $ gem install ffi-extractor
 
+### Fedora
+
+    $ sudo yum install libextractor libextractor-plugins
+
+### Ubuntu
+
+    $ sudo apt-get install libextractor libextractor-plugins
+
+### OSX
+
+    $ sudo brew install libextractor
+
 ## Copyright
 
 ffi-extractor - Ruby FFI bindings for libextractor
