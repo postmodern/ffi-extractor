@@ -19,8 +19,6 @@ file-types.
 
 libextractor is a part of the [GNU project](http://www.gnu.org/).
 
-## Features
-
 ## Examples
 
     require 'ffi/extractor'
