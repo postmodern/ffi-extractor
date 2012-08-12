@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'ffi/extractor/plugin_list'
 
 describe PluginList do
-  let(:plugin) { 'mp3' }
+  let(:plugin) { :mp3 }
 
   describe "default" do
     it "should load the default plugins" do

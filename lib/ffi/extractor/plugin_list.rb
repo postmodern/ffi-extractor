@@ -88,10 +88,11 @@ module FFI
       #   The plugin could not be loaded.
       #
       def add(name,options='',policy=:default)
+        name    = name.to_s
         new_ptr = Extractor.EXTRACTOR_plugin_add(@ptr,name,options,policy)
 
         if new_ptr == @ptr
-          raise(LoadError,"could not add #{name} to the plugin list")
+          raise(LoadError,"could not add #{name.dump} to the plugin list")
         end
 
         @ptr = new_ptr
@@ -111,10 +112,11 @@ module FFI
       #   The plugin could not be found in the list.
       #
       def remove(name)
+        name    = name.to_s
         new_ptr = Extractor.EXTRACTOR_plugin_remove(@ptr,name)
 
         if new_ptr == @ptr
-          raise(ArgumentError,"could not remove #{name} from the plugin list")
+          raise(ArgumentError,"could not remove #{name.dump} from the plugin list")
         end
 
         @ptr = new_ptr
