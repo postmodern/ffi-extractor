@@ -43,7 +43,7 @@ module FFI
       # @yieldparam [Symbol] type
       #   The type of metadata.
       #
-      # @yieldparam [Symbol] format
+      # @yieldparam [:unknown, :utf8, :binary, :c_string] format
       #   The format of the metadata.
       #
       # @yieldparam [String] mime_type
