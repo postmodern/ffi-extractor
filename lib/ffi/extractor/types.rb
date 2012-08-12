@@ -41,8 +41,8 @@ module FFI
     enum :extractor_meta_type, [
       # fundamental types
       :reserved, 0,
-      :mimetype, 1,
-      :filename, 2,
+      :mime_type, 1,
+      :file_name, 2,
       :comment, 3,
 
       # Standard types from bibtex
