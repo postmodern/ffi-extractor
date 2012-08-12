@@ -24,16 +24,16 @@ module FFI
   module Extractor
     class PluginList
 
-      def initialize(ptr)
+      def initialize(ptr=nil)
         @ptr = ptr
       end
 
       def self.release(ptr)
-        Extractor.EXTRACTOR_plugin_remove_all(self)
+        Extractor.EXTRACTOR_plugin_remove_all(ptr)
       end
 
-      def self.defaults(option=:default_policy)
-        ptr = Extractor.EXTRACTOR_plugin_add_defaults(option)
+      def self.defaults(policy=:default)
+        ptr = Extractor.EXTRACTOR_plugin_add_defaults(policy)
 
         if ptr.null?
           raise(LoadError,"no plugins were loaded")
@@ -42,12 +42,12 @@ module FFI
         return new(ptr)
       end
 
-      def add(library,library_options,option)
+      def add(library,options='',policy=:default)
         library = library.to_s
-        new_ptr = Extractor.EXTRACTOR_plugin_add(self,library,library_options,option)
+        new_ptr = Extractor.EXTRACTOR_plugin_add(@ptr,library,options,policy)
 
         if new_ptr == @ptr
-          raise("could not add #{library.dump} to the plugin list")
+          raise(LoadError,"could not add #{library.dump} to the plugin list")
         end
 
         @ptr = new_ptr
@@ -56,10 +56,10 @@ module FFI
 
       def remove(library)
         library = library.to_s
-        new_ptr = Extractor.EXTRACTOR_plugin_remove(self,library)
+        new_ptr = Extractor.EXTRACTOR_plugin_remove(@ptr,library)
 
         if new_ptr == @ptr
-          raise("could not remove #{library.dump} from the plugin list")
+          raise(ArgumentError,"could not remove #{library.dump} from the plugin list")
         end
 
         @ptr = new_ptr
@@ -69,7 +69,7 @@ module FFI
       alias delete remove
 
       def remove_all
-        Extractor.EXTRACTOR_plugin_remove_all(self)
+        Extractor.EXTRACTOR_plugin_remove_all(@ptr)
       end
 
       alias clear remove_all
