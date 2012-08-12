@@ -9,8 +9,8 @@ describe FFI::Extractor do
   end
 
   describe "abort!" do
-    it "should throw :return" do
-      lambda { subject.abort! }.should throw_symbol :return
+    it "should throw :return, 1" do
+      lambda { subject.abort! }.should throw_symbol(:return, 1)
     end
   end
 
