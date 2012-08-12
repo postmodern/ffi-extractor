@@ -43,20 +43,83 @@ module FFI
     attach_function :EXTRACTOR_extract, [:extractor_plugin_list, :string, :pointer, :size_t, :extractor_meta_data_processor, :pointer], :void
     attach_function :EXTRACTOR_meta_data_print, [:pointer, :string, :extractor_meta_type, :extractor_meta_format, :string, :string, :size_t], :int
 
+    #
+    # The default list of plugins.
+    #
+    # @return [PluginList]
+    #   The plugin list.
+    #
     def self.plugins
       @plugins ||= PluginList.default
     end
 
+    #
+    # Aborts metadata extraction.
+    #
     def self.abort!
       throw :abort, 1
     end
 
+    #
+    # Extracts metadata.
+    #
+    # @param [String] data
+    #   The data to extract from.
+    #
+    # @param [PluginList] plugins
+    #   The extraction plugins to use.
+    #
+    # @yield [plugin_name, type, format, mime_type, data]
+    #   The given block will be passed the extracted metadata.
+    #
+    # @yieldparam [Symbol] plugin_name
+    #   The name of the plugin.
+    #
+    # @yieldparam [Symbol] type
+    #   The type of metadata.
+    #
+    # @yieldparam [Symbol] format
+    #   The format of the metadata.
+    #
+    # @yieldparam [String] mime_type
+    #   The MIME-type of the data.
+    #
+    # @yieldparam [String] data
+    #   The extracted metadata.
+    #
     def self.extract(data,plugins=Extractor.plugins,&block)
       processor = MetadataProcessor.new(&block)
 
       Extractor.EXTRACTOR_extract(plugins,nil,data,data.length,processor,nil)
     end
 
+    #
+    # Extracts metadata from a file.
+    #
+    # @param [String] path
+    #   The path to the file.
+    #
+    # @param [PluginList] plugins
+    #   The extraction plugins to use.
+    #
+    # @yield [plugin_name, type, format, mime_type, data]
+    #   The given block will be passed the extracted metadata.
+    #
+    # @yieldparam [Symbol] plugin_name
+    #   The name of the plugin.
+    #
+    # @yieldparam [Symbol] type
+    #   The type of metadata.
+    #
+    # @yieldparam [Symbol] format
+    #   The format of the metadata.
+    #
+    # @yieldparam [String] mime_type
+    #   The MIME-type of the data.
+    #
+    # @yieldparam [String] data
+    #   The extracted metadata.
+    #
     def self.extract_from(path,plugins=Extractor.plugins,&block)
       processor = MetadataProcessor.new(&block)
 

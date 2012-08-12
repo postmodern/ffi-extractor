@@ -22,12 +22,37 @@ module FFI
   module Extractor
     class MetadataProcessor < Proc
 
+      # Mapping of plugin paths to names
       PLUGIN_NAMES = Hash.new do |plugin_names,plugin|
         libname = File.basename(plugin).chomp(File.extname(plugin))
 
         plugin_names[plugin] = libname.sub('libextractor_','').to_sym
       end
 
+      #
+      # Wraps a Metadata Processor callback.
+      #
+      # @yield [plugin_name, type, format, mime_type, data]
+      #   The given block will be passed the extracted metadata.
+      #
+      # @yieldparam [Symbol] plugin_name
+      #   The name of the plugin.
+      #
+      # @yieldparam [Symbol] type
+      #   The type of metadata.
+      #
+      # @yieldparam [Symbol] format
+      #   The format of the metadata.
+      #
+      # @yieldparam [String] mime_type
+      #   The MIME-type of the data.
+      #
+      # @yieldparam [String] data
+      #   The extracted metadata.
+      #
+      # @return [Proc]
+      #   The wrapped callback.
+      #
       def self.new(&block)
         super do |cls,plugin,type,format,mime_type,data,size|
           catch(:abort) {
