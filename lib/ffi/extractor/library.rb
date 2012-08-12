@@ -57,7 +57,7 @@ module FFI
     # Aborts metadata extraction.
     #
     def self.abort!
-      throw :abort, 1
+      throw :return, 1
     end
 
     #

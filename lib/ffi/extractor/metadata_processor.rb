@@ -55,9 +55,10 @@ module FFI
       #
       def self.new(&block)
         super do |cls,plugin,type,format,mime_type,data,size|
-          catch(:abort) {
+          catch(:return) {
             yield PLUGIN_NAMES[plugin], type, format, mime_type, data
-          } || 0
+            0
+          }
         end
       end
 
