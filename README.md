@@ -25,6 +25,14 @@ libextractor is a part of the [GNU project](http://www.gnu.org/).
 
     require 'ffi/extractor'
 
+    FFI::Extractor.extract(data) do |plugin,type,format,mime_type,data|
+      # ...
+    end
+
+    FFI::Extractor.extract_from(path) do |plugin,type,format,mime_type,data|
+      # ...
+    end
+
 ## Requirements
 
 * [ffi] ~> 1.0
