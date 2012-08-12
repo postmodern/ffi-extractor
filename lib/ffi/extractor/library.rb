@@ -19,6 +19,7 @@
 #
 
 require 'ffi/extractor/types'
+require 'ffi/extractor/plugin_list'
 
 require 'ffi'
 
@@ -41,5 +42,8 @@ module FFI
     attach_function :EXTRACTOR_extract, [:extractor_plugin_list, :string, :pointer, :size_t, :extractor_meta_data_processor, :pointer], :void
     attach_function :EXTRACTOR_meta_data_print, [:pointer, :string, :extractor_meta_type, :extractor_meta_format, :string, :string, :size_t], :int
 
+    def self.plugins
+      @plugins ||= PluginList.default
+    end
   end
 end
