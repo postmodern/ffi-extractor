@@ -22,14 +22,16 @@ module FFI
   module Extractor
     class MetadataProcessor < Proc
 
+      PLUGIN_NAMES = Hash.new do |plugin_names,plugin|
+        libname = File.basename(plugin).chomp(File.extname(plugin))
+
+        plugin_names[plugin] = libname.sub('libextractor_','').to_sym
+      end
+
       def self.new(&block)
-        super do |cls,plugin_name,type,format,mime_type,data,size|
+        super do |cls,plugin,type,format,mime_type,data,size|
           catch(:abort) {
-            yield plugin_name.to_sym,
-                  type,
-                  format,
-                  mime_type,
-                  data.get_bytes(0,size)
+            yield PLUGIN_NAMES[plugin], type, format, mime_type, data
           } || 0
         end
       end
