@@ -49,8 +49,9 @@ module FFI
       # @yieldparam [String] mime_type
       #   The MIME-type of the data.
       #
-      # @yieldparam [String] data
-      #   The extracted metadata.
+      # @yieldparam [String, FFI::Pointer] data
+      #   The extracted metadata. If the `type` is `:unknown`, the original
+      #   `FFI::Pointer` object will be yielded.
       #
       # @return [Proc]
       #   The wrapped callback.
@@ -64,11 +65,7 @@ module FFI
                     else                       data
                     end
 
-            yield PLUGIN_NAMES[plugin],
-                  type,
-                  format,
-                  mime_type,
-                  value
+            yield PLUGIN_NAMES[plugin], type, format, mime_type, value
 
             0
           }
