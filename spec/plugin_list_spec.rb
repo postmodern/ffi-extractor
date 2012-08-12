@@ -4,10 +4,10 @@ require 'ffi/extractor/plugin_list'
 describe PluginList do
   let(:plugin) { 'mp3' }
 
-  describe "defaults" do
+  describe "default" do
     it "should load the default plugins" do
       lambda {
-        described_class.defaults
+        described_class.default
       }.should_not raise_error(LoadError)
     end
 
@@ -16,7 +16,7 @@ describe PluginList do
 
       it "should raise LoadError" do
         lambda {
-          described_class.defaults
+          described_class.default
         }.should raise_error(LoadError)
       end
 

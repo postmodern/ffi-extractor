@@ -32,7 +32,7 @@ module FFI
         Extractor.EXTRACTOR_plugin_remove_all(ptr)
       end
 
-      def self.defaults(policy=:default)
+      def self.default(policy=:default)
         ptr = Extractor.EXTRACTOR_plugin_add_defaults(policy)
 
         if ptr.null?
