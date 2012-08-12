@@ -35,6 +35,7 @@ libextractor is a part of the [GNU project](http://www.gnu.org/).
 
 ## Requirements
 
+* [libextractor] >= 0.6.0
 * [ffi] ~> 1.0
 
 ## Install

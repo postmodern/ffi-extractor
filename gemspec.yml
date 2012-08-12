@@ -9,7 +9,7 @@ authors: Postmodern
 email: postmodern.mod3@gmail.com
 homepage: https://github.com/postmodern/ffi-extractor#readme
 
-requirements: libextractor
+requirements: libextractor >= 0.6.0
 
 dependencies:
   ffi: ~> 1.0
