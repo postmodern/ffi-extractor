@@ -247,7 +247,7 @@ module FFI
       :last, 180
     ]
 
-    callback :extractor_meta_data_processor, [:pointer, :string, :extractor_meta_type, :extractor_meta_format, :string, :string, :size_t], :int
+    callback :extractor_meta_data_processor, [:pointer, :string, :extractor_meta_type, :extractor_meta_format, :string, :pointer, :size_t], :int
 
     callback :extractor_extract_method, [:string, :size_t, :extractor_meta_data_processor, :pointer, :string], :int
 

@@ -18,6 +18,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
+require 'ffi'
+
 module FFI
   module Extractor
     class MetadataProcessor < Proc
@@ -56,7 +58,12 @@ module FFI
       def self.new(&block)
         super do |cls,plugin,type,format,mime_type,data,size|
           catch(:return) {
-            yield PLUGIN_NAMES[plugin], type, format, mime_type, data
+            yield PLUGIN_NAMES[plugin],
+                  type,
+                  format,
+                  mime_type,
+                  (data.get_bytes(0,size) if data)
+
             0
           }
         end

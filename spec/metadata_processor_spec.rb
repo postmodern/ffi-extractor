@@ -8,6 +8,13 @@ describe MetadataProcessor do
   let(:format)      { :utf8 }
   let(:mime_type)   { 'text/plain' }
   let(:data)        { 'PDF 1.5' }
+  let(:size)        { data.length }
+
+  let(:buffer) do
+    FFI::Buffer.new(size).tap do |buffer|
+      buffer.put_bytes(0,data)
+    end
+  end
 
   subject do
     processor = described_class.new do |plugin_name,type,format,mime_type,data|
@@ -19,7 +26,7 @@ describe MetadataProcessor do
     end
   end
 
-  before { subject.call(nil,plugin,type,format,mime_type,data) }
+  before { subject.call(nil,plugin,type,format,mime_type,buffer,size) }
 
   describe "yielded arguments" do
     it "should map plugin paths to names" do
@@ -44,7 +51,7 @@ describe MetadataProcessor do
   end
 
   it "should return 0 by default" do
-    subject.call(nil,plugin,type,format,mime_type,data).should == 0
+    subject.call(nil,plugin,type,format,mime_type,buffer,size).should == 0
   end
 
   context "when :return is thrown" do
@@ -55,7 +62,7 @@ describe MetadataProcessor do
     end
 
     it "should catch :abort" do
-      subject.call(nil,plugin,type,format,mime_type,data).should == 1
+      subject.call(nil,plugin,type,format,mime_type,buffer,size).should == 1
     end
   end
 end
