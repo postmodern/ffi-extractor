@@ -19,5 +19,5 @@
 #
 
 require 'ffi/extractor/library'
-require 'ffi/extractor/plugin_list'
+require 'ffi/extractor/extractor'
 require 'ffi/extractor/version'
