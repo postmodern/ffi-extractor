@@ -19,6 +19,7 @@
 #
 
 require 'ffi/extractor/types'
+require 'ffi/extractor/metadata_processor'
 require 'ffi/extractor/plugin_list'
 
 require 'ffi'
@@ -45,5 +46,22 @@ module FFI
     def self.plugins
       @plugins ||= PluginList.default
     end
+
+    def self.abort!
+      throw :abort, 1
+    end
+
+    def self.extract(data,plugins=Extractor.plugins,&block)
+      processor = MetadataProcessor.new(&block)
+
+      Extractor.EXTRACTOR_extract(plugins,nil,data,data.length,processor,nil)
+    end
+
+    def self.extract_from(path,plugins=Extractor.plugins,&block)
+      processor = MetadataProcessor.new(&block)
+
+      Extractor.EXTRACTOR_extract(plugins,path,nil,0,processor,nil)
+    end
+
   end
 end
