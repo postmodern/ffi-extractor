@@ -58,11 +58,17 @@ module FFI
       def self.new(&block)
         super do |cls,plugin,type,format,mime_type,data,size|
           catch(:return) {
+            value = case format
+                    when :c_string, :utf8 then data.get_string(0,size)
+                    when :binary          then data.get_bytes(0,size)
+                    else                       data
+                    end
+
             yield PLUGIN_NAMES[plugin],
                   type,
                   format,
                   mime_type,
-                  (data.get_bytes(0,size) if data)
+                  value
 
             0
           }

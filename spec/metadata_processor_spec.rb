@@ -11,7 +11,7 @@ describe MetadataProcessor do
   let(:size)        { data.length }
 
   let(:buffer) do
-    FFI::Buffer.new(size).tap do |buffer|
+    FFI::Buffer.new(size + 1).tap do |buffer|
       buffer.put_bytes(0,data)
     end
   end
@@ -45,8 +45,30 @@ describe MetadataProcessor do
       @yielded_mime_type.should == mime_type
     end
 
-    it "should yield the data" do
-      @yielded_data.should == data
+    describe "data" do
+      context "when passed binary" do
+        before { subject.call(nil,plugin,:binary,format,mime_type,buffer,size) }
+
+        it "should yield the bytes" do
+          @yielded_data.should == data
+        end
+      end
+
+      context "when passwd a c_string" do
+        before { subject.call(nil,plugin,:c_string,format,mime_type,buffer,size) }
+
+        it "should yield the string" do
+          @yielded_data.should == data
+        end
+      end
+
+      context "when passwd utf8" do
+        before { subject.call(nil,plugin,:utf8,format,mime_type,buffer,size) }
+
+        it "should yield the string" do
+          @yielded_data.should == data
+        end
+      end
     end
   end
 
