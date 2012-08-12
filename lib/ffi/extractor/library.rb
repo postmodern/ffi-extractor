@@ -32,9 +32,9 @@ module FFI
     attach_function :EXTRACTOR_metatype_to_description, [:extractor_meta_type], :string
     attach_function :EXTRACTOR_metatype_get_max, [], :extractor_meta_type
 
-    attach_function :EXTRACTOR_plugin_add_defaults, [:extractor_options], :extractor_plugin_list
-    attach_function :EXTRACTOR_plugin_add, [:extractor_plugin_list, :string, :string, :extractor_options], :extractor_plugin_list
-    attach_function :EXTRACTOR_plugin_add_config, [:extractor_plugin_list, :string, :extractor_options], :extractor_plugin_list
+    attach_function :EXTRACTOR_plugin_add_defaults, [:extractor_policy], :extractor_plugin_list
+    attach_function :EXTRACTOR_plugin_add, [:extractor_plugin_list, :string, :string, :extractor_policy], :extractor_plugin_list
+    attach_function :EXTRACTOR_plugin_add_config, [:extractor_plugin_list, :string, :extractor_policy], :extractor_plugin_list
     attach_function :EXTRACTOR_plugin_remove, [:extractor_plugin_list, :string], :extractor_plugin_list
     attach_function :EXTRACTOR_plugin_remove_all, [:extractor_plugin_list], :void
 

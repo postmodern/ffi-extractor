@@ -24,8 +24,8 @@ module FFI
   module Extractor
     extend FFI::Library
 
-    enum :extractor_options, [
-      :default_policy, 0,
+    enum :extractor_policy, [
+      :default, 0,
       :out_of_process_no_restart, 1,
       :in_process, 2,
       :disabled, 3
