@@ -26,7 +26,7 @@ module FFI
 
       # Mapping of plugin paths to names
       PLUGIN_NAMES = Hash.new do |plugin_names,plugin|
-        libname = File.basename(plugin).chomp(File.extname(plugin))
+        libname = File.basename(plugin,File.extname(plugin))
 
         plugin_names[plugin] = libname.sub('libextractor_','').to_sym
       end
