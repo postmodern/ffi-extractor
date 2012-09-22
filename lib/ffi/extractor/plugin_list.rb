@@ -33,7 +33,7 @@ module FFI
       # @param [FFI::Pointer] ptr
       #   The pointer to the list.
       #
-      def initialize(ptr=nil)
+      def initialize(ptr=FFI::Pointer.new(0))
         @ptr = ptr
       end
 
