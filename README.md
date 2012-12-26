@@ -50,7 +50,7 @@ libextractor is a part of the [GNU project](http://www.gnu.org/).
 
 ### OSX
 
-    $ sudo brew install libextractor
+    $ brew install libextractor
 
 ## Copyright
 
