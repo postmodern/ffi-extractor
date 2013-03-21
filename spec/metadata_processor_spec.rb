@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'ffi/extractor/metadata_processor'
 
-describe MetadataProcessor do
+describe FFI::Extractor::MetadataProcessor do
   let(:plugin_name) { :pdf }
   let(:plugin)      { "/usr/lib/libextractor/libextractor_#{plugin_name}.so" }
   let(:type)        { :format }
