@@ -5,12 +5,12 @@ require 'yaml'
 
 describe FFI::Extractor do
   it "should have a VERSION constant" do
-    subject.const_get('VERSION').should_not be_empty
+    expect(subject.const_get('VERSION')).not_to be_empty
   end
 
   describe "abort!" do
     it "should throw :return, 1" do
-      lambda { subject.abort! }.should throw_symbol(:return, 1)
+      expect { subject.abort! }.to throw_symbol(:return, 1)
     end
   end
 
@@ -27,7 +27,7 @@ describe FFI::Extractor do
         findings << arguments
       end
 
-      findings.should =~ metadata
+      expect(findings).to match(metadata)
     end
   end
 
@@ -39,7 +39,7 @@ describe FFI::Extractor do
         findings << arguments
       end
 
-      findings.should =~ metadata
+      expect(findings).to match(metadata)
     end
   end
 end

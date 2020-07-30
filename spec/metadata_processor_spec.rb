@@ -30,19 +30,19 @@ describe FFI::Extractor::MetadataProcessor do
 
   describe "yielded arguments" do
     it "should map plugin paths to names" do
-      @yielded_plugin_name.should == plugin_name
+      expect(@yielded_plugin_name).to eq(plugin_name)
     end
 
     it "should yield the type" do
-      @yielded_type.should == type
+      expect(@yielded_type).to eq(type)
     end
 
     it "should yield the format" do
-      @yielded_format.should == format
+      expect(@yielded_format).to eq(format)
     end
 
     it "should yield the mime-type" do
-      @yielded_mime_type.should == mime_type
+      expect(@yielded_mime_type).to eq(mime_type)
     end
 
     describe "data" do
@@ -50,7 +50,7 @@ describe FFI::Extractor::MetadataProcessor do
         before { subject.call(nil,plugin,:binary,format,mime_type,buffer,size) }
 
         it "should yield the bytes" do
-          @yielded_data.should == data
+          expect(@yielded_data).to eq(data)
         end
       end
 
@@ -58,7 +58,7 @@ describe FFI::Extractor::MetadataProcessor do
         before { subject.call(nil,plugin,:c_string,format,mime_type,buffer,size) }
 
         it "should yield the string" do
-          @yielded_data.should == data
+          expect(@yielded_data).to eq(data)
         end
       end
 
@@ -66,14 +66,14 @@ describe FFI::Extractor::MetadataProcessor do
         before { subject.call(nil,plugin,:utf8,format,mime_type,buffer,size) }
 
         it "should yield the string" do
-          @yielded_data.should == data
+          expect(@yielded_data).to eq(data)
         end
       end
     end
   end
 
   it "should return 0 by default" do
-    subject.call(nil,plugin,type,format,mime_type,buffer,size).should == 0
+    expect(subject.call(nil,plugin,type,format,mime_type,buffer,size)).to eq(0)
   end
 
   context "when :return is thrown" do
@@ -84,7 +84,7 @@ describe FFI::Extractor::MetadataProcessor do
     end
 
     it "should catch :abort" do
-      subject.call(nil,plugin,type,format,mime_type,buffer,size).should == 1
+      expect(subject.call(nil,plugin,type,format,mime_type,buffer,size)).to eq(1)
     end
   end
 end

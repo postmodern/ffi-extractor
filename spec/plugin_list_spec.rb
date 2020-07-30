@@ -6,18 +6,18 @@ describe FFI::Extractor::PluginList do
 
   describe "default" do
     it "should load the default plugins" do
-      lambda {
+      expect {
         described_class.default
-      }.should_not raise_error(LoadError)
+      }.not_to raise_error
     end
 
     context "when no plugins could be loaded" do
       before { ENV['LIBEXTRACTOR_LIBRARIES'] = '/does/not/exist' }
 
       it "should raise LoadError" do
-        lambda {
+        expect {
           described_class.default
-        }.should raise_error(LoadError)
+        }.to raise_error(LoadError)
       end
 
       after { ENV.delete('LIBEXTRACTOR_LIBRARIES') }
@@ -28,14 +28,14 @@ describe FFI::Extractor::PluginList do
     it "should load an individual plugin" do
       subject.add(plugin)
 
-      subject.to_ptr.should_not be_nil
+      expect(subject.to_ptr).not_to be_nil
     end
 
     context "when given an invalid plugin name" do
       it "should raise LoadError" do
-        lambda {
+        expect {
           subject.add('foo')
-        }.should raise_error(LoadError)
+        }.to raise_error(LoadError)
       end
     end
   end
@@ -49,9 +49,9 @@ describe FFI::Extractor::PluginList do
 
     context "when given an plugin name not in the list" do
       it "should raise LoadError" do
-        lambda {
+        expect {
           subject.remove('foo')
-        }.should raise_error(ArgumentError)
+        }.to raise_error(ArgumentError)
       end
     end
   end
