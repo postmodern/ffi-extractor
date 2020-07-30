@@ -8,18 +8,21 @@ describe FFI::Extractor do
     expect(subject.const_get('VERSION')).not_to be_empty
   end
 
-  describe "abort!" do
+  describe ".abort!" do
     it "should throw :return, 1" do
       expect { subject.abort! }.to throw_symbol(:return, 1)
     end
   end
 
-  let(:file) { 'spec/files/image.jpg'   }
-  let(:data) { File.new(file,'rb').read }
+  let(:fixtures_dir) { File.expand_path('spec/fixtures')   }
+  let(:file)         { File.join(fixtures_dir,'image.jpg') }
+  let(:data)         { File.new(file,'rb').read            }
 
-  let(:metadata) { YAML.load_file('spec/files/image.meta') }
+  let(:expected_metadata) do
+    YAML.load_file(File.join(fixtures_dir,'image-metadata.yml'))
+  end
 
-  describe "extract" do
+  describe ".extract" do
     it "should extract metadata from a String" do
       findings = []
 
@@ -27,11 +30,11 @@ describe FFI::Extractor do
         findings << arguments
       end
 
-      expect(findings).to match(metadata)
+      expect(findings).to match(expected_metadata)
     end
   end
 
-  describe "extract_from" do
+  describe ".extract_from" do
     it "should extract metadata from a file" do
       findings = []
 
@@ -39,7 +42,7 @@ describe FFI::Extractor do
         findings << arguments
       end
 
-      expect(findings).to match(metadata)
+      expect(findings).to match(expected_metadata)
     end
   end
 end
