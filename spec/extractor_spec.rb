@@ -30,7 +30,7 @@ describe FFI::Extractor do
         findings << arguments
       end
 
-      expect(findings).to match_array(expected_metadata)
+      expect(findings).to include(*expected_metadata)
     end
   end
 
@@ -42,7 +42,7 @@ describe FFI::Extractor do
         findings << arguments
       end
 
-      expect(findings).to match_array(expected_metadata)
+      expect(findings).to include(*expected_metadata)
     end
   end
 end
