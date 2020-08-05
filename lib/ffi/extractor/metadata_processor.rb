@@ -22,6 +22,9 @@ require 'ffi'
 
 module FFI
   module Extractor
+    #
+    # @api private
+    #
     class MetadataProcessor
 
       # Mapping of plugin paths to names
