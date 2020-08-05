@@ -22,7 +22,7 @@ require 'ffi'
 
 module FFI
   module Extractor
-    class MetadataProcessor < Proc
+    class MetadataProcessor
 
       # Mapping of plugin paths to names
       PLUGIN_NAMES = Hash.new do |plugin_names,plugin|
@@ -53,23 +53,58 @@ module FFI
       #   The extracted metadata. If the `type` is `:unknown`, the original
       #   `FFI::Pointer` object will be yielded.
       #
-      # @return [Proc]
-      #   The wrapped callback.
+      def initialize(&block)
+        @callback = block
+      end
+
       #
-      def self.new(&block)
-        super do |cls,plugin,type,format,mime_type,data,size|
-          catch(:return) {
-            value = case format
-                    when :c_string, :utf8 then data.get_string(0,size)
-                    when :binary          then data.get_bytes(0,size)
-                    else                       data
-                    end
+      # Invokes the callback.
+      #
+      # @param [FFI::Pointer] cls
+      #
+      # @param [String] plugin
+      #   The libextractor plugin name.
+      #
+      # @param [Symbol] type
+      #   The `extractor_meta_type`.
+      #
+      # @param [Symbol] format
+      #   The `extractor_meta_format`.
+      #
+      # @param [String] mime_type
+      #   The MIME type of the data.
+      #
+      # @param [FFI::Pointer] data
+      #   The pointer to the data.
+      #
+      # @param [Integer] size
+      #   The size of the data.
+      #
+      # @return [0, 1]
+      #   `0` indicates to libextractor that the metadata processor should
+      #   contain. `1` indicates that the metadata processor wishes to abort.
+      #
+      def call(cls,plugin,type,format,mime_type,data,size)
+        catch(:return) do
+          value = case format
+                  when :c_string, :utf8 then data.get_string(0,size)
+                  when :binary          then data.get_bytes(0,size)
+                  else                       data
+                  end
 
-            yield PLUGIN_NAMES[plugin], type, format, mime_type, value
+          @callback.call(PLUGIN_NAMES[plugin],type,format,mime_type,value)
 
-            0
-          }
+          0
         end
+      end
+
+      #
+      # Converts the metadata processor to a Proc.
+      #
+      # @return [Proc]
+      #
+      def to_proc
+        method(:call).to_proc
       end
 
     end
