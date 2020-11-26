@@ -27,8 +27,8 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
       - name: Install libextractor
         run: |
-          apt update -y && \
-          apt install -y libextractor-dev
+          sudo apt update -y && \
+          sudo apt install -y libextractor-dev
       - name: Install dependencies
         run: bundle install --jobs 4 --retry 3
       - name: Run tests
