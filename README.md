@@ -41,13 +41,13 @@ libextractor is a part of the [GNU project](http://www.gnu.org/).
 
     $ gem install ffi-extractor
 
-### Fedora
+### Debian / Ubuntu
 
-    $ sudo yum install libextractor libextractor-plugins
+    $ sudo apt-get install libextractor-dev libextractor-plugins-all
 
-### Ubuntu
+### RedHat Fedora
 
-    $ sudo apt-get install libextractor libextractor-plugins
+    $ sudo dnf install libextractor-devel libextractor-plugins
 
 ### OSX
 
