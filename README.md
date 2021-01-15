@@ -53,6 +53,12 @@ libextractor is a part of the [GNU project](http://www.gnu.org/).
 
     $ brew install libextractor
 
+## Crystal
+
+[extractor.cr] is a Crystal port of this library.
+
+[extractor.cr]: https://github.com/postmodern/extractor.cr#readme
+
 ## Copyright
 
 ffi-extractor - Ruby FFI bindings for libextractor
