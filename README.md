@@ -55,9 +55,10 @@ libextractor is a part of the [GNU project](http://www.gnu.org/).
 
 ## Crystal
 
-[extractor.cr] is a Crystal port of this library.
+[extractor.cr] is a [Crystal][crystal-lang] port of this library.
 
 [extractor.cr]: https://github.com/postmodern/extractor.cr#readme
+[crystal-lang]: https://www.crystal-lang.org/
 
 ## Copyright
 
