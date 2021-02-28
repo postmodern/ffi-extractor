@@ -1,6 +1,7 @@
 # ffi-extractor
 
 [![CI](https://github.com/postmodern/ffi-extractor/actions/workflows/ruby.yml/badge.svg)](https://github.com/postmodern/ffi-extractor/actions/workflows/ruby.yml)
+[![Code Climate](https://codeclimate.com/github/postmodern/ffi-extractor.svg)](https://codeclimate.com/github/postmodern/ffi-extractor)
 
 * [Homepage](https://github.com/postmodern/ffi-extractor#readme)
 * [Issues](https://github.com/postmodern/ffi-extractor/issues)
