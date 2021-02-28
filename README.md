@@ -1,10 +1,11 @@
 # ffi-extractor
 
+[![CI](https://github.com/postmodern/ffi-extractor/actions/workflows/ruby.yml/badge.svg)](https://github.com/postmodern/ffi-extractor/actions/workflows/ruby.yml)
+
 * [Homepage](https://github.com/postmodern/ffi-extractor#readme)
 * [Issues](https://github.com/postmodern/ffi-extractor/issues)
 * [Documentation](http://rubydoc.info/gems/ffi-extractor/frames)
 * [Email](mailto:postmodern.mod3 at gmail.com)
-* [![Build Status](https://travis-ci.org/postmodern/ffi-extractor.svg)](https://travis-ci.org/postmodern/ffi-extractor)
 
 ## Description
 
