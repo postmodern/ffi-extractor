@@ -6,7 +6,6 @@
 * [Homepage](https://github.com/postmodern/ffi-extractor#readme)
 * [Issues](https://github.com/postmodern/ffi-extractor/issues)
 * [Documentation](http://rubydoc.info/gems/ffi-extractor/frames)
-* [Email](mailto:postmodern.mod3 at gmail.com)
 
 ## Description
 
